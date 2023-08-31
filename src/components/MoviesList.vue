@@ -4,22 +4,19 @@
             <ion-select-option v-for="genre in genreList" :value="genre" :key="genre">{{ genre[<any>'name'] }}</ion-select-option>
         </ion-select>
         <ion-button class="btn-clear-filter" v-if="selectedGenre" expand="full" @click="clearFilter">Clear filter</ion-button>
-        <ion-grid>
-            <ion-row v-for="movie in filteredMovies" :key="movie['Id']">
-                <ion-col size="6" size-md="4" size-lg="2">
-                    <ion-card expand="block" @click="setMovie(movie) && setOpen(true)">
-                        <img :alt="movie['Name']" :src="movie['LargePosterUrl']" />
-                        <ion-card-header>
-                            <ion-card-title>{{movie['Name']}}</ion-card-title>
-                            <ion-card-subtitle>Director: {{movie['Director'] || 'Unknown'}}</ion-card-subtitle>
-                        </ion-card-header>
-                        <ion-card-content>
-                                Genres: {{ movie['Genres'] }}
-                        </ion-card-content>
-                    </ion-card>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+    
+        <ion-card v-for="movie in filteredMovies" :key="movie['Id']" expand="block" @click="setMovie(movie) && setOpen(true)">
+            <div class="card-img">
+                <img :alt="movie['Name']" :src="movie['LargePosterUrl']" />
+            </div>
+            <ion-card-header>
+                <ion-card-title>{{movie['Name']}}</ion-card-title>
+                <ion-card-subtitle>Director: {{movie['Director'] || 'Unknown'}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+                Genres: {{ movie['Genres'] }}
+            </ion-card-content>
+        </ion-card>
         <ion-modal :movie="selectedMovie" :is-open="isOpen" >
             <ion-header>
                 <ion-toolbar>
@@ -56,11 +53,13 @@
             </ion-card>
             </ion-content>
         </ion-modal>
+
     </div>
 </template>
 <script lang="ts">
 import { IonDatetime, IonDatetimeButton, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import axios from 'axios';
+import MovieDetails from './MovieDetails.vue';
 
   export default {
     data() {
@@ -119,17 +118,21 @@ import axios from 'axios';
 
 <style scoped>
 
+
+
 #moviesListContainer {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
-ion-row.md{
-    justify-content: center;
+.card-img{
+    width: fit-content;
+    height: 500px;
 }
 
-ion-card.md {
-    justify-content: center;
-    align-items: center;
+ion-card {
+    width: 320px;
+    
 }
 
 .genre-select {
