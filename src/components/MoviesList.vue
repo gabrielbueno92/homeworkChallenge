@@ -5,7 +5,7 @@
         </ion-select>
         <ion-button class="btn-clear-filter" v-if="selectedGenre" expand="full" @click="clearFilter">Clear filter</ion-button>
     
-        <ion-card v-for="movie in filteredMovies" :key="movie['Id']" expand="block" @click="setMovie(movie) && setOpen(true)">
+        <ion-card class="card-list" v-for="movie in filteredMovies" :key="movie['Id']" expand="block" @click="setMovie(movie) && setOpen(true)">
             <div class="card-img">
                 <img :alt="movie['Name']" :src="movie['LargePosterUrl']" />
             </div>
@@ -28,7 +28,7 @@
             </ion-header>
             <ion-content class="ion-padding">
             <ion-card>
-                <div class="img-container">
+                <div class="img-card-modal">
                     <img :src="movieSelected.LargePosterUrl" :alt="movieSelected.Name">
                 </div>
                 <ion-card-header>
@@ -59,7 +59,6 @@
 <script lang="ts">
 import { IonDatetime, IonDatetimeButton, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import axios from 'axios';
-import MovieDetails from './MovieDetails.vue';
 
   export default {
     data() {
@@ -128,11 +127,29 @@ import MovieDetails from './MovieDetails.vue';
 .card-img{
     width: fit-content;
     height: 500px;
+    align-items: stretch;
+    display: flex;
+    align-content: stretch;
 }
 
-ion-card {
+
+
+@media (min-width: 760px) {
+    .img-card-modal {
+        width: 550px;
+        display: flex;
+        justify-content: center;
+
+    }
+}
+
+.card-list {
     width: 320px;
     
+}
+
+ion-modal {
+    justify-content: center;
 }
 
 .genre-select {
