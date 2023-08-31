@@ -132,8 +132,6 @@ import axios from 'axios';
     align-content: stretch;
 }
 
-
-
 @media (min-width: 760px) {
     .img-card-modal {
         width: 550px;
