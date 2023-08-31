@@ -1,10 +1,10 @@
 <template>
-    <div id="moviesListContainer"> 
-        <ion-select class="genre-select" placeholder="Select genre" v-model="selectedGenre" @ionChange="filterMovies">
-            <ion-select-option v-for="genre in genreList" :value="genre" :key="genre">{{ genre[<any>'name'] }}</ion-select-option>
-        </ion-select>
-        <ion-button class="btn-clear-filter" v-if="selectedGenre" expand="full" @click="clearFilter">Clear filter</ion-button>
     
+    <ion-select class="genre-select" placeholder="Select genre" v-model="selectedGenre" @ionChange="filterMovies">
+        <ion-select-option v-for="genre in genreList" :value="genre" :key="genre">{{ genre[<any>'name'] }}</ion-select-option>
+    </ion-select>
+    <ion-button class="btn-clear-filter" v-if="selectedGenre" expand="full" @click="clearFilter">Clear filter</ion-button>
+    <div id="moviesListContainer">  
         <ion-card class="card-list" v-for="movie in filteredMovies" :key="movie['Id']" expand="block" @click="setMovie(movie) && setOpen(true)">
             <div class="card-img">
                 <img :alt="movie['Name']" :src="movie['LargePosterUrl']" />
