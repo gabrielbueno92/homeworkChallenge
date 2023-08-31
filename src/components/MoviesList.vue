@@ -20,7 +20,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-        <ion-modal :movie="selectedMovie" :is-open="isOpen">
+        <ion-modal :movie="selectedMovie" :is-open="isOpen" >
             <ion-header>
                 <ion-toolbar>
                 <ion-title>Movie details</ion-title>
@@ -45,7 +45,7 @@
                     <b>Director:</b> {{ movieSelected.Director }}
                 </ion-card-content>
                 <ion-card-content>
-                    <b>Release Date:</b> {{ movieSelected.ReleasedAt }}
+                    <b>Release Date:</b> {{ (movieSelected.ReleasedAt).substr(0,10) }}
                 </ion-card-content>
                 <ion-card-content>
                     <b>Run time:</b> {{ movieSelected.RunningTime }} minutes
@@ -59,7 +59,7 @@
     </div>
 </template>
 <script lang="ts">
-import { IonDatetime, IonDatetimeButton, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption } from '@ionic/vue';
+import { IonDatetime, IonDatetimeButton, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import axios from 'axios';
 
   export default {
@@ -69,6 +69,7 @@ import axios from 'axios';
             genreList: [],
             selectedMovie: null,
             selectedGenre: null,
+            date: ""
         };
     },
     computed: {
@@ -77,7 +78,7 @@ import axios from 'axios';
                 return this.moviesList.filter((movie) => movie['Genres'].includes(this.selectedGenre[<any>'code']) === true);
             }
             return this.moviesList;
-        }
+        },
     },
     methods: {
         async getDataFromMoviesApi() {
@@ -96,13 +97,12 @@ import axios from 'axios';
         clearFilter(){
             this.selectedGenre = null;
             this.$forceUpdate();
-
         },
     },
     created(){
         this.getDataFromMoviesApi();
     },
-    components: {IonDatetime, IonDatetimeButton, IonModal, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonContent, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption },
+    components: {IonDatetime, IonDatetimeButton, IonModal, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonContent, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol },
 };
 </script>
 

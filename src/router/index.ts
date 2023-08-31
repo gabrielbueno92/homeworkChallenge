@@ -22,13 +22,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'movies',
         component: () => import('@/views/MoviesTab.vue'), 
-      },
-      {
-        path: 'movies/details',
-        name: 'movie-details',
-        component: () => import('@/views/MovieDetails.vue'),
-        props: true
-      },
+      }
     ]
   }
 ]

@@ -22,15 +22,20 @@
         <ion-item>
             <ion-toggle>Are you a popcorn fan?</ion-toggle>
         </ion-item>
+        <ion-item>What genre of movie do you prefer?</ion-item>
         <ion-item>
-            <ion-segment value="default">
-                <ion-segment-button value="women">
-                    <ion-label>Women</ion-label>
+            <ion-segment @ion-change="segmentChanged($event)">
+                <ion-segment-button value="comedy">
+                    <ion-label>Comedy</ion-label>
                 </ion-segment-button>
-                <ion-segment-button value="men">
-                    <ion-label>Men</ion-label>
+                <ion-segment-button value="horror">
+                    <ion-label>Horror</ion-label>
                 </ion-segment-button>
+                <p v-if="showComedyText && comedySelected">Yeah, laugh non-stop!</p>
+                <p v-else-if="horrorSelected">Afterwards I can't sleep at night</p>
             </ion-segment>
+        </ion-item>
+        <ion-item>
         </ion-item>
         <ion-item>
                 <ion-button>Sign In</ion-button>
@@ -47,12 +52,34 @@ export default {
             name: "",
             lastName: "",
             email: "",
-            formSubmitted: false
+            formSubmitted: false,
+            showComedyText: false,
+            comedySelected: false,
+            horrorSelected: false,
         };
     },
     methods: {
         submitForm: function () {
             this.formSubmitted = true;
+        },
+        segmentChanged(ev: CustomEvent){
+            console.log(ev)
+            if(ev.detail.value == "comedy"){
+                this.showComedyText = true;
+                this.comedySelected = true;
+            }
+            if(ev.detail.value == "horror"){
+                this.showComedyText = false;
+                this.comedySelected = false;
+                this.horrorSelected = true;
+            }
+
+            if(ev.detail.value == undefined){
+                this.showComedyText = false;
+                this.comedySelected = false;
+                this.horrorSelected = false;
+            }
+            
         }
     },
     components: { IonDatetime, IonDatetimeButton, IonModal, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonInput, IonButton },
