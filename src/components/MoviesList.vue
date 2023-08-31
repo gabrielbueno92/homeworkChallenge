@@ -82,7 +82,7 @@ import axios from 'axios';
     methods: {
         async getDataFromMoviesApi() {
             try {  
-                const response = await axios.get('https://www.eventcinemas.com.au/Movies/GetNowShowing');
+                const response = await axios.get('https://cors-proxy-api-gb-dev.fl0.io/https://www.eventcinemas.com.au/Movies/GetNowShowing');
                 this.moviesList = response.data.Data.Movies;
                 this.genreList = response.data.Data.Genres;
                 console.log(response.data.Data.Movies);
