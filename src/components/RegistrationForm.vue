@@ -15,7 +15,7 @@
                 <ion-label class="birth">Date of birth:</ion-label>
                 <ion-datetime-button class="date" datetime="datetime">
                 <ion-modal :keep-contents-mounted="true">
-                    <ion-datetime :show-default-buttons="true" presentation="date" id="datetime"></ion-datetime>
+                    <ion-datetime :v-model="birth" :show-default-buttons="true" presentation="date" id="datetime" @ionChange="setDate($event)"></ion-datetime>
                 </ion-modal>  
                 </ion-datetime-button>
             </ion-item>
@@ -43,11 +43,11 @@
             
             </ion-item>
         </ion-list>
-        <div v-if="formSubmitted">
+        <div class="form-submitted" v-if="formSubmitted">
             <p>Name: {{ name }}</p>
             <p>Last name: {{ lastName }}</p>
             <p>Email: {{ email }}</p>
-            <!-- <p>Birth date: {{ birth }}</p> -->
+            <p>Birth date: {{ birth }}</p>
             <p>Popcorn fan: {{ popCornFan == true ? "Yes" : "No" }}</p>
             <p>Favourite movie genre: {{ comedySelected == true ? "Comedy" : "Horror" }}</p>
         </div>
@@ -61,7 +61,7 @@ export default {
             name: "",
             lastName: "",
             email: "",
-            // birth: new Date().toLocaleDateString(),
+            birth: this.setDateToday(),
             popCornFan: false,
             formSubmitted: false,
             showComedyText: false,
@@ -70,11 +70,17 @@ export default {
         };
     },
     methods: {
-        submitForm: function () {
+        submitForm() {
             this.formSubmitted = true;
         },
+        setDateToday(){
+            const currentDate = new Date()
+            return `${currentDate.getFullYear()}-${(currentDate.getMonth()+1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`
+        },
+        setDate(ev: CustomEvent) {
+            this.birth = (ev.detail.value).substr(0,10);
+        },
         segmentChanged(ev: CustomEvent){
-            console.log(ev)
             if(ev.detail.value == "comedy"){
                 this.showComedyText = true;
                 this.comedySelected = true;
@@ -101,6 +107,10 @@ export default {
 
 .content {
     list-style-type: none;
+}
+
+.form-submitted {
+    margin: 40px;
 }
 
 </style>
