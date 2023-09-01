@@ -41,3 +41,24 @@ This is a programming challenge project where I created an application using Ion
 2. In the movies tab, you should see a list of movies on the main page extracted from a movies API.
 3. Click on a movie to access its details, where you can view more detailed information about the movie.
 
+
+## Things to Improve
+
+#### 1. Create a Service Class
+- Consider creating a new service class where all the calls to external APIs used by the application can be centralized. This will help manage data retrieval more efficiently.
+
+#### 2. Create a MovieDetails view instead of a component
+- Change the MovieDetails component to a MovieDetails view, adding this route to the router.
+
+#### 3. Apply Styling
+- Enhance the visual appeal of the application by adding styles to make it more aesthetically pleasing. Consider using CSS frameworks or custom stylesheets to improve the user interface.
+
+#### 4. Date Formatting
+- Improve the date formatting to ensure that dates are displayed in an Australian format.
+
+#### 5. Refine the MovieList Component
+- Refine the MovieList component code. 
+
+#### 6. Data Validation
+- Implement data validation for user input in forms to ensure that only valid data is processed.
+
