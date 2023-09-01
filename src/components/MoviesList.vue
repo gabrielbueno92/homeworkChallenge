@@ -17,7 +17,7 @@
                 Genres: {{ movie['Genres'] }}
             </ion-card-content>
         </ion-card>
-        <ion-modal :movie="selectedMovie" :is-open="isOpen" >
+        <ion-modal :movie="movieSelected" :is-open="isOpen" >
             <ion-header>
                 <ion-toolbar>
                 <ion-title>Movie details</ion-title>
@@ -27,45 +27,23 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">
-            <ion-card>
-                <div class="img-card-modal">
-                    <img :src="movieSelected.LargePosterUrl" :alt="movieSelected.Name">
-                </div>
-                <ion-card-header>
-                    <ion-card-title>{{ movieSelected.Name }}</ion-card-title>
-                    <ion-card-subtitle> <b>Genres: </b>{{ movieSelected.Genres }}</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content>
-                    <b>Synopsis:</b> {{ movieSelected.Synopsis }}
-                </ion-card-content>
-                <ion-card-content>
-                    <b>Director:</b> {{ movieSelected.Director }}
-                </ion-card-content>
-                <ion-card-content>
-                    <b>Release Date:</b> {{ (movieSelected.ReleasedAt).substr(0,10) }}
-                </ion-card-content>
-                <ion-card-content>
-                    <b>Run time:</b> {{ movieSelected.RunningTime }} minutes
-                </ion-card-content>
-                <ion-card-content>
-                    <b>Cast:</b> {{ movieSelected.MainCast }}
-                </ion-card-content>
-            </ion-card>
+                <MovieDetails :movie="movieSelected"></MovieDetails>
             </ion-content>
         </ion-modal>
+
 
     </div>
 </template>
 <script lang="ts">
-import { IonDatetime, IonDatetimeButton, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption } from '@ionic/vue';
 import axios from 'axios';
+import MovieDetails from './MovieDetails.vue';
 
   export default {
     data() {
         return {
             moviesList: [],
             genreList: [],
-            selectedMovie: null,
             selectedGenre: null,
             date: ""
         };
@@ -99,7 +77,7 @@ import axios from 'axios';
     created(){
         this.getDataFromMoviesApi();
     },
-    components: {IonDatetime, IonDatetimeButton, IonModal, IonToggle, IonLabel, IonSegment, IonSegmentButton, IonContent, IonItem, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol },
+    components: { MovieDetails, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSelect, IonSelectOption },
 };
 </script>
 
