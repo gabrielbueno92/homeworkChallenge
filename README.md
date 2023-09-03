@@ -26,7 +26,11 @@ This is a programming challenge project where I created an application using Ion
    ```bash
    npm install
    ```
-   
+3. Install the ionic CLI with npm:
+
+   ```bash
+   npm install -g @ionic/cli
+   ```
 ### Step 3: Run the Application in Development Mode
 1. Run the following command to start the application in development mode:
 
